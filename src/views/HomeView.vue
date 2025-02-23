@@ -1,0 +1,74 @@
+<template>
+  <!-- <div>{{ message }}</div> -->
+  <div>
+    <p>这里是 HomeView 页面 监听属性和生命</p>
+    <div>
+      <input type="text" placeholder="请输入名字" v-model="formLabel.name">
+    </div>
+    <div>
+      <input type="number" step="0.1" v-model="formLabel.age">
+    </div>
+    <div>
+      {{ num }} <button @click="numAdd">点击加</button>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { reactive, ref, defineComponent, onMounted, onUpdated, onBeforeUpdate, onBeforeMount, onBeforeUnmount, onUnmounted, watchEffect, watch } from 'vue'
+
+export default defineComponent({
+  name: 'HomeView',
+  setup() {
+
+    const num = ref(0);
+    const formLabel = reactive({
+      name: 'test',
+      age: 20,
+    })
+    const state = reactive({ x: 0, y: 0 });
+    watch(() => formLabel, (val, oldVal) => {
+      console.log(`new count: ${JSON.stringify(val)}，old count: ${JSON.stringify(oldVal)}`)
+    });
+
+    // watch(() => formLabel, (val, oldVal) => {
+    //   console.log(`new count: ${JSON.stringify(val)}，old count: ${JSON.stringify(oldVal)}`)
+    // }, { deep: true });
+
+    watchEffect(() => {
+      console.log('HomeView 响应式数据变化了', formLabel.name);
+      console.log('HomeView 响应式数据变化了', formLabel.age);
+    })
+
+    // 生命周期函数
+    onBeforeMount(() => {
+      console.log('onBeforeMount', 1);
+    })
+    onMounted(() => {
+      console.log('onMounted', 2);
+      console.log('state ======', state, state.y);
+    })
+    onBeforeUpdate(() => {
+      console.log('onBeforeUpdate', 3);
+    })
+    onUpdated(() => {
+      console.log('onUpdated', 4);
+    })
+    onBeforeUnmount(() => {
+      console.log('onBeforeUnmount', 5);
+    })
+    onUnmounted(() => {
+      console.log('onUnmounted', 6);
+    })
+    const numAdd = () => {
+      num.value++
+    }
+    return {
+      num,
+      formLabel,
+      numAdd,
+      state
+    }
+  },
+})
+</script>
