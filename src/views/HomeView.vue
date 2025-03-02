@@ -14,61 +14,51 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { reactive, ref, defineComponent, onMounted, onUpdated, onBeforeUpdate, onBeforeMount, onBeforeUnmount, onUnmounted, watchEffect, watch } from 'vue'
-
-export default defineComponent({
-  name: 'HomeView',
-  setup() {
-
-    const num = ref(0);
-    const formLabel = reactive({
-      name: 'test',
-      age: 20,
-    })
-    const state = reactive({ x: 0, y: 0 });
-    watch(() => formLabel, (val, oldVal) => {
-      console.log(`new count: ${JSON.stringify(val)}，old count: ${JSON.stringify(oldVal)}`)
-    });
-
-    // watch(() => formLabel, (val, oldVal) => {
-    //   console.log(`new count: ${JSON.stringify(val)}，old count: ${JSON.stringify(oldVal)}`)
-    // }, { deep: true });
-
-    watchEffect(() => {
-      console.log('HomeView 响应式数据变化了', formLabel.name);
-      console.log('HomeView 响应式数据变化了', formLabel.age);
-    })
-
-    // 生命周期函数
-    onBeforeMount(() => {
-      console.log('onBeforeMount', 1);
-    })
-    onMounted(() => {
-      console.log('onMounted', 2);
-      console.log('state ======', state, state.y);
-    })
-    onBeforeUpdate(() => {
-      console.log('onBeforeUpdate', 3);
-    })
-    onUpdated(() => {
-      console.log('onUpdated', 4);
-    })
-    onBeforeUnmount(() => {
-      console.log('onBeforeUnmount', 5);
-    })
-    onUnmounted(() => {
-      console.log('onUnmounted', 6);
-    })
-    const numAdd = () => {
-      num.value++
-    }
-    return {
-      num,
-      formLabel,
-      numAdd,
-      state
-    }
-  },
+import { useRoute } from 'vue-router';
+const num = ref(0);
+const route = useRoute();
+const formLabel = reactive({
+  name: 'test',
+  age: 20,
 })
+const state = reactive({ x: 0, y: 0 });
+watch(() => formLabel, (val, oldVal) => {
+  console.log(`new count: ${JSON.stringify(val)}，old count: ${JSON.stringify(oldVal)}`)
+});
+
+// watch(() => formLabel, (val, oldVal) => {
+//   console.log(`new count: ${JSON.stringify(val)}，old count: ${JSON.stringify(oldVal)}`)
+// }, { deep: true });
+
+watchEffect(() => {
+  console.log('HomeView 响应式数据变化了', formLabel.name);
+  console.log('HomeView 响应式数据变化了', formLabel.age);
+})
+
+// 生命周期函数
+onBeforeMount(() => {
+  let params = route.query;
+  console.log('onBeforeMount', 1, params, route);
+})
+onMounted(() => {
+  console.log('onMounted', 2);
+  console.log('state ======', state, state.y);
+})
+onBeforeUpdate(() => {
+  console.log('onBeforeUpdate', 3);
+})
+onUpdated(() => {
+  console.log('onUpdated', 4);
+})
+onBeforeUnmount(() => {
+  console.log('onBeforeUnmount', 5);
+})
+onUnmounted(() => {
+  console.log('onUnmounted', 6);
+})
+const numAdd = () => {
+  num.value++
+}
 </script>

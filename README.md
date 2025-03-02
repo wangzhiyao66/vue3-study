@@ -16,6 +16,8 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 
 ## Project Setup
 
+node version v20.8.0
+
 ```sh
 npm install
 ```

@@ -4,13 +4,13 @@ import { defineStore } from 'pinia'
 interface userType {
   userName: string
   passWord: string
-  permission: Array<any>
+  permission: Array<String> | unknown
 }
 
 export const UserInfoStore = defineStore('UserInfo', {
 
   state: () => ({
-    pageId: 12,
+    isLogin: false,
     permissionList: ['All', 'Home', 'Over', 'Story', 'Task', 'Problem', ' Version', 'Setting', 'UserCenter'],
     userInfo: {
       userName: '',  // 用户名
@@ -19,16 +19,17 @@ export const UserInfoStore = defineStore('UserInfo', {
     }
   }),
   getters: {
-    doubleID: (state: { pageId: number }) => state.pageId * 2,
+    // doubleID: (state: { pageId: number }) => state.pageId * 2,
   },
   actions: {
-    setPageId(num: number) {
-      this.pageId = num;
+    login(userInfo: userType) {
+      this.isLogin = true;
+      this.userInfo = userInfo;
     },
-    setUser(obj: userType): void {
-      this.userInfo = obj;
-      // console.log('obj', this.userInfo);
-    }
+    logout() {
+      this.isLogin = false;
+      this.userInfo = { userName: null, userRole: null };
+    },
   },
   persist: true, // 启用持久化 See https://prazdevs.github.io/pinia-plugin-persistedstate/zh/guide/
 })
