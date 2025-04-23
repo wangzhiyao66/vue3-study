@@ -25,6 +25,7 @@ import { reactive, ref, defineComponent } from 'vue'
 import { UserInfoStore } from '@/stores/UserInfo'
 import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
+import { useResetForm } from '@/hook/useResetForm';
 
 const store = UserInfoStore();
 const router = useRouter();
@@ -36,6 +37,13 @@ const formLabel = reactive({
   name: '',
   password: '',
 })
+
+// const { formLabel, reset } = useResetForm(() => {
+//   return {
+//     name: '',
+//     password: '',
+//   }
+// });
 
 // 表单密码校验规则
 const validatePass = (
