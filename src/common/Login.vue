@@ -165,6 +165,9 @@ function resetForm() {
   width: 125px;
   letter-spacing: 3px;
   text-align: center;
+  padding: 0;
+  height: 35px;
+  line-height: 35px;
 }
 </style>
 @/stores/UserInfo
