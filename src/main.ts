@@ -29,7 +29,9 @@ pinia.use(piniaPluginPersistedstate)
 app.use(pinia)
 app.use(router)
 app.use(ElementPlus)
+// 第一种使用 创建一个全局的 LoadingService
 app.use(LoadingService);
+// 第二种直接使用
 // 创建一个全局的 loading 实例
 // let loadingInstance: any = null;
 // let requestCount = 0;
