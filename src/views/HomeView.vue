@@ -15,7 +15,8 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, defineComponent, onMounted, onUpdated, onBeforeUpdate, onBeforeMount, onBeforeUnmount, onUnmounted, watchEffect, watch } from 'vue'
+import { getDatalist, getHomeData } from '@/API';
+import { reactive, ref, defineComponent, onMounted, onUpdated, onBeforeUpdate, onBeforeMount, onBeforeUnmount, onUnmounted, watchEffect, watch, getCurrentInstance } from 'vue'
 import { useRoute } from 'vue-router';
 const num = ref(0);
 const route = useRoute();
@@ -24,6 +25,7 @@ const formLabel = reactive({
   age: 20,
 })
 const state = reactive({ x: 0, y: 0 });
+const { proxy } = getCurrentInstance();
 watch(() => formLabel, (val, oldVal) => {
   console.log(`new count: ${JSON.stringify(val)}，old count: ${JSON.stringify(oldVal)}`)
 });
@@ -44,7 +46,8 @@ onBeforeMount(() => {
 })
 onMounted(() => {
   console.log('onMounted', 2);
-  console.log('state ======', state, state.y);
+  getData();
+  getDataList();
 })
 onBeforeUpdate(() => {
   console.log('onBeforeUpdate', 3);
@@ -60,5 +63,25 @@ onUnmounted(() => {
 })
 const numAdd = () => {
   num.value++
+}
+const getData = () => {
+  proxy.$showLoading();
+  getHomeData().then(res => {
+    console.log('getData ====', res);
+    proxy.$hideLoading();
+  }).catch(err => {
+    console.log('getData err', err);
+  })
+
+}
+const getDataList = () => {
+  proxy.$showLoading();
+  getDatalist().then(res => {
+    console.log('getDataList ====', res);
+    proxy.$hideLoading();
+  }).catch(err => {
+    console.log('getDataList err', err);
+  })
+
 }
 </script>

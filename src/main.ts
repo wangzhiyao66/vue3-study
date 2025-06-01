@@ -34,7 +34,7 @@ let requestCount = 0;
 
 const showLoading = () => {
   if (requestCount === 0) {
-    loadingInstance = ElLoading.service({ lock: true, text: 'Loading', background: 'rgba(0, 0, 0, 0.7)' });
+    loadingInstance = ElLoading.service({ lock: true, text: 'Loading', background: 'rgba(255, 255, 255, 0.7)' });
   }
   requestCount++;
 };
