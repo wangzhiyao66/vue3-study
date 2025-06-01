@@ -68,9 +68,10 @@ const getData = () => {
   proxy.$showLoading();
   getHomeData().then(res => {
     console.log('getData ====', res);
-    proxy.$hideLoading();
   }).catch(err => {
     console.log('getData err', err);
+  }).finally(() => {
+    proxy.$hideLoading();
   })
 
 }
@@ -78,9 +79,10 @@ const getDataList = () => {
   proxy.$showLoading();
   getDatalist().then(res => {
     console.log('getDataList ====', res);
-    proxy.$hideLoading();
   }).catch(err => {
     console.log('getDataList err', err);
+  }).finally(() => {
+    proxy.$hideLoading();
   })
 
 }

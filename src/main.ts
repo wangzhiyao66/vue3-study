@@ -11,10 +11,11 @@ import 'element-plus/dist/index.css';
 import 'element-ui/lib/theme-chalk/index.css';
 // import ElementUI from 'element-ui';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import { ElLoading } from 'element-plus';
+// import { ElLoading } from 'element-plus';
 
 import App from './App.vue'
 import router from './router'
+import LoadingService from './components/loading/loadingService';
 
 const app = createApp(App)
 
@@ -28,27 +29,28 @@ pinia.use(piniaPluginPersistedstate)
 app.use(pinia)
 app.use(router)
 app.use(ElementPlus)
+app.use(LoadingService);
 // 创建一个全局的 loading 实例
-let loadingInstance: any = null;
-let requestCount = 0;
+// let loadingInstance: any = null;
+// let requestCount = 0;
 
-const showLoading = () => {
-  if (requestCount === 0) {
-    loadingInstance = ElLoading.service({ lock: true, text: 'Loading', background: 'rgba(255, 255, 255, 0.7)' });
-  }
-  requestCount++;
-};
+// const showLoading = () => {
+//   if (requestCount === 0) {
+//     loadingInstance = ElLoading.service({ lock: true, text: 'Loading', background: 'rgba(255, 255, 255, 0.7)' });
+//   }
+//   requestCount++;
+// };
 
-const hideLoading = () => {
-  requestCount--;
-  if (requestCount === 0) {
-    loadingInstance.close();
-  }
-};
+// const hideLoading = () => {
+//   requestCount--;
+//   if (requestCount === 0) {
+//     loadingInstance.close();
+//   }
+// };
 
-// 将 showLoading 和 hideLoading 挂载到 Vue 的全局属性上
-app.config.globalProperties.$showLoading = showLoading;
-app.config.globalProperties.$hideLoading = hideLoading;
+// // 将 showLoading 和 hideLoading 挂载到 Vue 的全局属性上
+// app.config.globalProperties.$showLoading = showLoading;
+// app.config.globalProperties.$hideLoading = hideLoading;
 
 
 app.mount('#app')
