@@ -1,23 +1,23 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
-// https://pinia.vuejs.org/zh/introduction.html
-// export const useCounterStore = defineStore('counter', () => {
-
-//   const count = ref(0)
-
-//   const doubleCount = computed(() => count.value * 2)
-
-//   function increment() {
-//     count.value++
-//   }
-
-//   return { count, doubleCount, increment }
-// })
-export const useCounterStore = defineStore('counter', {
+import { defineStore } from "pinia"
+// request-count store to track the number of requests ，记录并发请求数量
+export const useRequestCountStore = defineStore('request-count', {
   state: () => ({
     count: 0,
   }),
   getters: {
-    doubleCount: (state) => state.count * 2,
+    doubleCount: (state: { count: number }) => state.count * 2,
   },
+  actions: {
+    increment() {
+      this.count++
+    },
+    decrement() {
+      this.count--
+    },
+    reset() {
+      this.count = 0
+      localStorage
+    }
+  },
+  persist: true, // 启用持久化 See https://prazdevs.github.io/pinia-plugin-persistedstate/zh/guide/
 })
