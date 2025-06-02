@@ -15,10 +15,12 @@
 </template>
 
 <script lang="ts" setup>
-import { getDatalist, getHomeData } from '@/API';
+import { getDatalist, getHomeData, getSearchData } from '@/API';
+import { requestManager } from '@/utils/RequestManager';
 import { reactive, ref, defineComponent, onMounted, onUpdated, onBeforeUpdate, onBeforeMount, onBeforeUnmount, onUnmounted, watchEffect, watch, getCurrentInstance } from 'vue'
 import { useRoute } from 'vue-router';
-const num = ref(0);
+const num = ref(1);
+let time: any = null;
 const route = useRoute();
 const formLabel = reactive({
   name: 'test',
@@ -44,46 +46,89 @@ onBeforeMount(() => {
   let params = route.query;
   console.log('onBeforeMount', 1, params, route);
 })
-onMounted(() => {
+onMounted(async () => {
   console.log('onMounted', 2);
+  time = setInterval(() => {
+    console.log(num.value, '秒，定时器执行中...');
+    num.value++;
+    if (num.value > 12) {
+      clearInterval(time);
+    }
+  }, 1000);
   getData();
   getDataList();
+  serachData();
 })
-onBeforeUpdate(() => {
-  console.log('onBeforeUpdate', 3);
-})
-onUpdated(() => {
-  console.log('onUpdated', 4);
-})
-onBeforeUnmount(() => {
-  console.log('onBeforeUnmount', 5);
-})
-onUnmounted(() => {
-  console.log('onUnmounted', 6);
-})
+// onBeforeUpdate(() => {
+//   console.log('onBeforeUpdate', 3);
+// })
+// onUpdated(() => {
+//   console.log('onUpdated', 4);
+// })
+// onBeforeUnmount(() => {
+//   console.log('onBeforeUnmount', 5);
+// })
+// onUnmounted(() => {
+//   console.log('onUnmounted', 6);
+// })
 const numAdd = () => {
   num.value++
 }
-const getData = () => {
+const getData = async () => {
   proxy.$showLoading();
-  getHomeData().then(res => {
-    console.log('getData ====', res);
-  }).catch(err => {
-    console.log('getData err', err);
-  }).finally(() => {
-    proxy.$hideLoading();
-  })
-
+  requestManager.addRequest(async () => {
+    // // 并发请求异步处理不了
+    // getHomeData().then(res => {
+    //   console.log('getData ====', res);
+    // }).catch(err => {
+    //   console.log('getData err', err);
+    // }).finally(() => {
+    //   proxy.$hideLoading();
+    // })
+    // 同步请求并发限制
+    const response = await getHomeData()
+    if (response) {
+      console.log('getData ====', response);
+      proxy.$hideLoading();
+    }
+  });
 }
-const getDataList = () => {
+const getDataList = async () => {
   proxy.$showLoading();
-  getDatalist().then(res => {
-    console.log('getDataList ====', res);
-  }).catch(err => {
-    console.log('getDataList err', err);
-  }).finally(() => {
-    proxy.$hideLoading();
-  })
+  requestManager.addRequest(async () => {
+    // getDatalist().then(res => {
+    //   console.log('getDataList ====', res);
+    // }).catch(err => {
+    //   console.log('getDataList err', err);
+    // }).finally(() => {
+    //   proxy.$hideLoading();
+    // })
+    // // 同步请求并发限制
+    const response = await getDatalist()
+    if (response) {
+      console.log('getDataList ====', response);
+      proxy.$hideLoading();
+    }
+  });
+}
 
+const serachData = async () => {
+  // console.log('serachData', formLabel);
+  requestManager.addRequest(async () => {
+    // proxy.$showLoading();
+    // getSearchData().then(res => {
+    //   console.log('serachData ====', res);
+    // }).catch(err => {
+    //   console.log('serachData err', err);
+    // }).finally(() => {
+    //   proxy.$hideLoading();
+    // })
+    // // 同步请求并发限制
+    const response = await getSearchData()
+    if (response) {
+      console.log('serachData ====', response);
+      proxy.$hideLoading();
+    }
+  });
 }
 </script>

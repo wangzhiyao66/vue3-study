@@ -14,7 +14,7 @@ export function getHomeData() {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve([{ id: 1, name: 'John' }, { id: 2, name: 'Jane' }]);
-    }, 2000);
+    }, 3000);
   });
 }
 // 生成一个 getDatalist 的方法，2秒后返回有一个promise的表格数据，包含id, name, age, email，phonenumber, address 字段,共计20条数据
@@ -33,6 +33,14 @@ export function getDatalist() {
         });
       }
       resolve(data);
+    }, 5000);
+  });
+}
+
+export function getSearchData() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({ id: 1, name: 'John', age: 25, email: 'john@example.com', phonenumber: '13800123456', address: 'Address 1', createdAt: '2023-04-01', updatedAt: '2023-04-01' });
     }, 5000);
   });
 }

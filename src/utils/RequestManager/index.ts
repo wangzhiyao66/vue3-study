@@ -38,6 +38,7 @@ class RequestManager {
   async addRequest(requestFn: any) {
     return new Promise((resolve, reject) => {
       this.requestQueue.push({ requestFn, resolve, reject });
+      // console.log("当前请求数 == ", this.currentRequests);
       this.processQueue();
     });
   }
@@ -48,10 +49,11 @@ class RequestManager {
    */
   async processQueue() {
     if (this.currentRequests >= this.maxConcurrentRequests || this.requestQueue.length === 0) {
+      // console.log("当前请求数 == ", this.currentRequests);
       return;
     }
-
     const { requestFn, resolve, reject } = this.requestQueue.shift();
+    // console.log("当前请求数 == ", requestFn);
     this.currentRequests++;
     counterStore.increment();
 
