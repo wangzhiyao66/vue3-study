@@ -76,59 +76,74 @@ const numAdd = () => {
 }
 const getData = async () => {
   proxy.$showLoading();
+  // getHomeData().then(res => {
+  //   console.log('getData ====', res);
+  // }).catch(err => {
+  //   console.log('getData err', err);
+  // }).finally(() => {
+  //   proxy.$hideLoading();
+  // })
   requestManager.addRequest(async () => {
-    // // 并发请求异步处理不了
-    // getHomeData().then(res => {
-    //   console.log('getData ====', res);
-    // }).catch(err => {
-    //   console.log('getData err', err);
-    // }).finally(() => {
+    return getHomeData()
+    // // 同步请求并发限制
+    // const response = await getHomeData()
+    // if (response) {
+    //   console.log('getData ====', response);
     //   proxy.$hideLoading();
-    // })
-    // 同步请求并发限制
-    const response = await getHomeData()
-    if (response) {
-      console.log('getData ====', response);
-      proxy.$hideLoading();
-    }
+    // }
+  }).then((res) => {
+    console.log('getData ====', res);
+  }).finally(() => {
+    proxy.$hideLoading();
   });
 }
 const getDataList = async () => {
   proxy.$showLoading();
+  // getDatalist().then(res => {
+  //   console.log('getDataList ====', res);
+  // }).catch(err => {
+  //   console.log('getDataList err', err);
+  // }).finally(() => {
+  //   proxy.$hideLoading();
+  // })
   requestManager.addRequest(async () => {
-    // getDatalist().then(res => {
-    //   console.log('getDataList ====', res);
-    // }).catch(err => {
-    //   console.log('getDataList err', err);
-    // }).finally(() => {
-    //   proxy.$hideLoading();
-    // })
+    return getDatalist()
     // // 同步请求并发限制
-    const response = await getDatalist()
-    if (response) {
-      console.log('getDataList ====', response);
-      proxy.$hideLoading();
-    }
+    // const response = await getDatalist()
+    // if (response) {
+    //   console.log('getDataList ====', response);
+    //   proxy.$hideLoading();
+    // }
+  }).then((res) => {
+    console.log('getDataList ====', res);
+    proxy.$hideLoading();
+  }).finally(() => {
+    proxy.$hideLoading();
   });
 }
 
 const serachData = async () => {
   // console.log('serachData', formLabel);
+  proxy.$showLoading();
+  // getSearchData().then(res => {
+  //   console.log('serachData ====', res);
+  // }).catch(err => {
+  //   console.log('serachData err', err);
+  // }).finally(() => {
+  //   proxy.$hideLoading();
+  // })
   requestManager.addRequest(async () => {
-    // proxy.$showLoading();
-    // getSearchData().then(res => {
-    //   console.log('serachData ====', res);
-    // }).catch(err => {
-    //   console.log('serachData err', err);
-    // }).finally(() => {
-    //   proxy.$hideLoading();
-    // })
+    return getSearchData()
     // // 同步请求并发限制
-    const response = await getSearchData()
-    if (response) {
-      console.log('serachData ====', response);
-      proxy.$hideLoading();
-    }
+    // const response = await getSearchData()
+    // if (response) {
+    //   console.log('serachData ====', response);
+    //   proxy.$hideLoading();
+    // }
+  }).then((res) => {
+    console.log('serachData ====', res);
+  }).finally(() => {
+    proxy.$hideLoading();
   });
 }
 </script>
