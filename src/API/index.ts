@@ -1,14 +1,4 @@
-// export function useGetAllUsers() {
-//   const { data, isLoading } = useQuery(
-//     ['users'],
-//     async () => await useGetAllUsers(),
-//     {
-//       refetchOnWindowFocus: false,
-//     },
-//   );
 
-//   return { users: data, isLoading };
-// }
 // 生成一个getHomeData的方法，2秒后返回有一个promise的数组
 export function getHomeData() {
   return new Promise((resolve) => {
