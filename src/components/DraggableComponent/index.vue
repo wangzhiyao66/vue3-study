@@ -8,7 +8,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { throttle } from '@/utils/throttle';
 import { ref, onMounted, onUnmounted } from 'vue';
 
 const position = ref({ x: 0, y: 0 });
@@ -39,12 +38,8 @@ const drag = (event: { clientX: number; clientY: number; }) => {
 
 onMounted(() => {
   rect = draggableRef.value?.getBoundingClientRect(); // 获取元素尺寸和位置信息，仅在挂载后执行一次，避免性能问题
-  window.addEventListener('mousemove',
-    drag
-  );
-  window.addEventListener('mouseup',
-    stopDrag
-  );
+  window.addEventListener('mousemove', drag);
+  window.addEventListener('mouseup', stopDrag);
 });
 
 onUnmounted(() => {

@@ -27,7 +27,8 @@ const formLabel = reactive({
   age: 20,
 })
 const state = reactive({ x: 0, y: 0 });
-const { proxy } = getCurrentInstance();
+const Instance = getCurrentInstance();
+const proxy: any = Instance?.proxy;
 watch(() => formLabel, (val, oldVal) => {
   console.log(`new count: ${JSON.stringify(val)}，old count: ${JSON.stringify(oldVal)}`)
 });
@@ -36,10 +37,14 @@ watch(() => formLabel, (val, oldVal) => {
 //   console.log(`new count: ${JSON.stringify(val)}，old count: ${JSON.stringify(oldVal)}`)
 // }, { deep: true });
 
-watchEffect(() => {
-  console.log('HomeView 响应式数据变化了', formLabel.name);
-  console.log('HomeView 响应式数据变化了', formLabel.age);
-})
+// watchEffect(() => {
+//   console.log('HomeView 响应式数据变化了', formLabel.name);
+//   console.log('HomeView 响应式数据变化了', formLabel.age);
+// })
+// 监听控制
+const { stop, pause, resume } = watchEffect(() => {
+  console.log('count changed:', num.value);
+});
 
 // 生命周期函数
 onBeforeMount(() => {
@@ -53,12 +58,23 @@ onMounted(async () => {
     num.value++;
     if (num.value > 12) {
       clearInterval(time);
+      num.value = 0;
+    }
+    if (num.value > 2) {
+      pause()
+    }
+    if (num.value > 5) {
+      resume()
+    }
+    if (num.value > 11) {
+      stop()
     }
   }, 1000);
   getData();
   getDataList();
   serachData();
 })
+
 // onBeforeUpdate(() => {
 //   console.log('onBeforeUpdate', 3);
 // })
