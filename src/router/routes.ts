@@ -68,7 +68,7 @@ export const routerList: any = [
         name: 'Setting',
         icon: "el-icon-setting",
         title: '设置',
-        component: () => import('@/views/SettingView.vue')
+        component: () => import('@/views/settingView/SettingView.vue')
       },
       {
         path: 'usercenter',
