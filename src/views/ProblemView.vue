@@ -1,12 +1,13 @@
 <template>
   <div>
     <p>这里是 ProblemView 页面</p>
+    <Myinput v-model="url3"></Myinput>
   </div>
 </template>
 <style lang="less" scoped></style>
 <script lang="ts" setup>
 import { getParam, getQueryParams } from '@/utils'
-
+import Myinput from '@/components/Myinput.vue'
 
 
 
