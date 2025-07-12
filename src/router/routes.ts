@@ -83,6 +83,12 @@ export const routerList: any = [
       //   title: '购物车结算',
       //   component: ProduceList,
       // },
+      {
+        path: 'slot-demo',
+        name: 'SlotDemo',
+        title: '插槽示例',
+        component: () => import('@/components/SlotUsageDemo.vue'),
+      }
     ]
   },
   {
