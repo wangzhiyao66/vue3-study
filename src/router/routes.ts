@@ -86,6 +86,7 @@ export const routerList: any = [
       {
         path: 'slot-demo',
         name: 'SlotDemo',
+        icon: "el-icon-help",
         title: '插槽示例',
         component: () => import('@/components/SlotUsageDemo.vue'),
       }

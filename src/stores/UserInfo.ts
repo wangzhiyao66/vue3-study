@@ -10,7 +10,7 @@ export const UserInfoStore = defineStore('UserInfo', {
 
   state: () => ({
     isLogin: false,
-    permissionList: ['All', 'Home', 'Over', 'Story', 'Task', 'Problem', ' Version', 'Setting', 'UserCenter'],
+    permissionList: ['All', 'Home', 'Over', 'Story', 'Task', 'Problem', ' Version', 'Setting', 'UserCenter', 'About', 'SlotDemo'],
     userInfo: {
       userName: '',  // 用户名
       passWord: '',  // 密码

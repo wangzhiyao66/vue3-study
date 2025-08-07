@@ -53,6 +53,8 @@ export default defineComponent({
     // console.log('list', list.menus);
     onMounted(() => {
       const permisnsion: Array<string> = userStore.userInfo.permission;
+      // console.log("🚀 ~ setup ~ permisnsion:", permisnsion)
+      console.log("%c🚀 ~ submitForm ~ UserPermission:", 'color:red;font-size:16px;', permisnsion)
       // console.log('permisnsion', userStore.userInfo.permission);
       // 当前用户没有任何权限时，需要重新登陆获取权限
       if (userStore.userInfo.permission.length == 0) {

@@ -98,7 +98,7 @@ function submitForm() {
       let UserPermission = null;
       // admin 用户具有所有模块的查看权限
       if (this.formLabel.name == 'admin') {
-        UserPermission = ['All', 'Home', 'Over', 'Story', 'Task', 'Problem', ' Version', 'Setting', 'UserCenter']
+        UserPermission = ['All', 'Home', 'Over', 'Story', 'Task', 'Problem', ' Version', 'Setting', 'UserCenter', 'SlotDemo']
       } else {
         UserPermission = ['Home', 'Over', 'Story', 'Task', 'Problem', 'UserCenter']
       }
