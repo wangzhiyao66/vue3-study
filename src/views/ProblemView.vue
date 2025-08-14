@@ -1,16 +1,13 @@
 <template>
   <div>
     <p>这里是 ProblemView 页面</p>
-    <Myinput v-model="url3"></Myinput>
+    <Myinput :value="url3"></Myinput>
   </div>
 </template>
 <style lang="less" scoped></style>
 <script lang="ts" setup>
 import { getParam, getQueryParams } from '@/utils'
 import Myinput from '@/components/Myinput.vue'
-
-
-
 defineOptions({
   name: 'ProblemView'
 })
@@ -51,4 +48,9 @@ console.log('url5 ==  ', Object.fromEntries(new URL(url3).searchParams))
 /**
  * { id: '55', name: '张三', age: '20' }
  */
+let list = [
+  { id: '1', name: '张三', age: 3 },
+  { id: '2', name: '张三', age: 2 },
+  { id: '3', name: '张三', age: 1 }
+];
 </script>
