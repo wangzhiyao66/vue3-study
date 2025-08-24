@@ -89,6 +89,20 @@ export const routerList: any = [
         icon: "el-icon-help",
         title: '插槽示例',
         component: () => import('@/components/SlotUsageDemo.vue'),
+      },
+      {
+        path: 'icon-demo',
+        name: 'IconDemo',
+        icon: "el-icon-picture",
+        title: '图标示例',
+        component: () => import('@/components/IconDemo.vue'),
+      },
+      {
+        path: 'echarts-demo',
+        name: 'EChartsDemo',
+        icon: "el-icon-data-line",
+        title: 'ECharts示例',
+        component: () => import('@/views/ChinaMap/index.vue'),
       }
     ]
   },
