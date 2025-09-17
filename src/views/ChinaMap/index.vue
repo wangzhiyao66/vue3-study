@@ -2,6 +2,7 @@
   <div>
     <p>这里是 chinaMap 页面</p>
     <div class="my-map-box">
+      <NestedRingDemo></NestedRingDemo>
       <EChartsComponent :options="chartOptions" :height=height />
     </div>
   </div>
@@ -9,6 +10,7 @@
 
 <script lang="ts" setup>
 import EChartsComponent from '@/components/EChartsComponent.vue';
+import NestedRingDemo from '@/components/NestedRingEcharts/NestedRingDemo.vue';
 import * as echarts from 'echarts/core';
 
 // 引入中国地图数据,注册中国地图
